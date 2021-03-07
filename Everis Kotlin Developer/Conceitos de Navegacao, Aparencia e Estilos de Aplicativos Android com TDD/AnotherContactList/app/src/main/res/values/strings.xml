@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Another Contact List</string>
+    <string name="iv_photograph_content_description">photograph</string>
+    <string name="menu_1">Menu 1</string>
+    <string name="menu_2">Menu 2</string>
+    <string name="open_drawer">Abrir</string>
+    <string name="close_drawer">Fechar</string>
+    <string name="contact_list_key">contacts</string>
+</resources>
