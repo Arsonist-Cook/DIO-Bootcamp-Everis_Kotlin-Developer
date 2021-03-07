@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="btn_counter" type="id"/>
+    <item name="btn_showView" type="id"/>
+    <item name="tv_counter" type="id"/>
+    <item name="counter_label" type="id"/>
+</resources>
