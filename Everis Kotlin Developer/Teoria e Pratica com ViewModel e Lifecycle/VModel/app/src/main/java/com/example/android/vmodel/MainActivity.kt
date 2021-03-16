@@ -9,19 +9,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.databinding.DataBindingUtil
+import com.example.android.vmodel.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private val tvCounter: TextView by lazy {
-        findViewById<TextView>(R.id.tv_counter)
-    }
-
-    private val btnCounter: Button by lazy {
-        findViewById<Button>(R.id.btn_counter)
-    }
-
-    private val btnShowView: Button by lazy {
-        findViewById<Button>(R.id.btn_showView)
-    }
+    private lateinit var binding : ActivityMainBinding
 
     private val mViewModel: MainViewModel by lazy {
         ViewModelProvider(this).get(MainViewModel::class.java)
@@ -29,22 +21,25 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setListeners()
     }
 
     private fun setListeners() {
-        btnCounter.setOnClickListener {
-            mViewModel.count()
+        binding.apply {
+            btnCounter.setOnClickListener {
+                mViewModel.count()
+            }
+            invalidateAll()
+            btnShowView.setOnClickListener {
+                Toast.makeText(
+                        applicationContext,
+                        "Contador: ${mViewModel.mCounter.value}",
+                        Toast.LENGTH_SHORT
+                ).show()
+            }
         }
-        btnShowView.setOnClickListener {
-            Toast.makeText(
-                applicationContext,
-                "Contador: ${mViewModel.mCounter.value}",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-        mViewModel.mCounter.observe(this, Observer { tvCounter.text = it })
+        mViewModel.mCounter.observe(this, Observer { binding.tvCounter.text = it })
     }
 
 
